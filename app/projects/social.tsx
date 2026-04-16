@@ -2,19 +2,43 @@ import { Image } from "expo-image";
 import { Link } from "expo-router";
 import React, { useRef } from "react";
 import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import Githubbrandssolid1 from "./assets/github-brands-solid.svg";
-import Instagrambrandssolid1 from "./assets/instagram-brands-solid.svg";
-import "./global.css";
+import Githubbrandssolid1 from "../assets/github-brands-solid.svg";
+import Instagrambrandssolid1 from "../assets/instagram-brands-solid.svg";
+import "../global.css";
 
-export default function Index() {
+// const CourseCard = ({
+//   title,
+//   semester,
+// }: {
+//   title: string;
+//   semester: string;
+// }) => (
+//   <View style={styles.card}>
+//     {/* Area Atas (Placeholder Gambar/Warna Abu-abu) */}
+//     <View style={styles.imagePlaceholder}>
+//       <View style={styles.leftGray} />
+//       <View style={styles.rightGray} />
+//     </View>
+
+//     {/* Area Bawah (Teks Hitam) */}
+//     <View style={styles.textContainer}>
+//       <View style={styles.textWrapper}>
+//         <Text style={styles.titleText}>{title}</Text>
+//         <Text style={styles.semesterText}>{semester}</Text>
+//       </View>
+//     </View>
+//   </View>
+// );
+
+export default function Science() {
   const scrollRef = useRef<ScrollView>(null);
   const scrollToTop = () => {
     scrollRef.current?.scrollTo({ y: 0, animated: true });
@@ -64,49 +88,57 @@ export default function Index() {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={true}
       >
-        <View style={styles.skillsSectionContainer}>
-          <View style={styles.mainSketchWrapper}>
-            {/* SATU GAMBAR SKETSA UTUH (Sudah ada garis tengahnya) */}
-            <Image
-              source={require("./assets/image.png")}
-              style={styles.fullSketchImage}
-              resizeMode="contain"
-            />
-
-            {/* TEKS DESKRIPSI KIRI (Designer) */}
-            <View style={styles.descriptionLeftWrapper}>
-              <Text style={styles.descriptionTextLeft}>
-                Sketchs are the skills that I have recently{"\n"}got from
-                writing my projects.
-              </Text>
+        <View style={styles.row}>
+          <View style={styles.card}>
+            {/* Area Atas (Placeholder Gambar/Warna Abu-abu) */}
+            <View style={styles.imagePlaceholder}>
+              <Image
+                source={require("../assets/poster.png")}
+                style={styles.leftGray}
+              />
+              <Image
+                source={require("../assets/report.png")}
+                style={styles.rightGray}
+              />
             </View>
 
-            {/* TEKS JUDUL KIRI (Designer) */}
-            <View style={styles.titleLeftWrapper}>
-              <Text style={styles.titleDesignerText}>designer</Text>
-            </View>
-
-            {/* TEKS DESKRIPSI KANAN (AI-Developer) */}
-            <View style={styles.descriptionRightWrapper}>
-              <Text style={styles.descriptionTextRight}>
-                The one thats work/developing around{"\n"}AI regions such as,
-                chatbot as well as{"\n"}voice assistant.
-              </Text>
-            </View>
-
-            {/* TEKS JUDUL KANAN (AI-Developer) */}
-            <View style={styles.titleRightWrapper}>
-              <Text style={styles.titleAiDevText}>AI-developer</Text>
+            {/* Area Bawah (Teks Hitam) */}
+            <View style={styles.textContainer}>
+              <View style={styles.textWrapper}>
+                <Text style={styles.titleText}>Planning Skills Part 1</Text>
+                <Text style={styles.semesterText}>Semester 1</Text>
+              </View>
             </View>
           </View>
 
-          {/* GARIS BAWAH PANJANG (Di luar wrapper gambar) */}
-          <View style={styles.bottomHorizontalLine} />
+          <View style={styles.card}>
+            {/* Area Atas (Placeholder Gambar/Warna Abu-abu) */}
+            <View style={styles.imagePlaceholder}>
+              <Image
+                source={require("../assets/shortfilm-clip.png")}
+                style={styles.leftGray}
+              />
+              <Image
+                source={require("../assets/skript.png")}
+                style={styles.rightGray}
+              />
+            </View>
+
+            {/* Area Bawah (Teks Hitam) */}
+            <View style={styles.textContainer}>
+              <View style={styles.textWrapper}>
+                <Text style={styles.titleText}>
+                  Independence Day - Short Film
+                </Text>
+                <Text style={styles.semesterText}>Semester 1</Text>
+              </View>
+            </View>
+          </View>
         </View>
       </ScrollView>
 
       <View style={{ flex: 1, backgroundColor: "#f9f9f7" }}>
-        <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
+        <ScrollView ref={scrollRef}>
           {/* Konten Halaman Anda di sini */}
           <View style={{ height: 1000 }} />
         </ScrollView>
@@ -211,25 +243,27 @@ const styles = StyleSheet.create({
     backgroundColor: "#f9f9f7", // Warna krem pucat seperti di gambar
     minHeight: "100%",
     paddingBottom: 100,
+    flex: 1,
+    justifyContent: "center",
   },
-  // titleContainer: {
-  //   alignItems: "center",
-  //   marginTop: 80,
-  // },
-  // mainTitle: {
-  //   fontSize: 32,
-  //   fontWeight: "600",
-  //   letterSpacing: 2,
-  //   color: "#333",
-  //   fontFamily: "Exo350B",
-  //   opacity: 0.95,
-  // },
-  // underline: {
-  //   width: "80%",
-  //   height: 1,
-  //   backgroundColor: "#ccc",
-  //   marginTop: 20,
-  // },
+  titleContainer: {
+    alignItems: "center",
+    marginTop: 80,
+  },
+  mainTitle: {
+    fontSize: 32,
+    fontWeight: "600",
+    letterSpacing: 2,
+    color: "#333",
+    fontFamily: "Exo350B",
+    opacity: 0.95,
+  },
+  underline: {
+    width: "80%",
+    height: 1,
+    backgroundColor: "#ccc",
+    marginTop: 20,
+  },
   contentPlaceholder: {
     padding: 20,
     alignItems: "center",
@@ -245,46 +279,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  //   footer: {
-  //     backgroundColor: "#ebebeb",
-  //   },
-  //   arrowUpContainer: {
-  //     alignItems: "center",
-  //     marginTop: -20, // Menarik dekorasi ke atas
-  //   },
-  //   arrowLine: {
-  //     width: 40,
-  //     height: 40,
-  //     backgroundColor: "#ebebeb",
-  //     transform: [{ rotate: "45deg" }],
-  //     borderTopWidth: 1,
-  //     borderLeftWidth: 1,
-  //     borderColor: "#ccc",
-  //   },
-  //   footerBottom: {
-  //     flexDirection: "row",
-  //     justifyContent: "space-between",
-  //     padding: 20,
-  //     alignItems: "center",
-  //   },
-  //   footerCopyright: {
-  //     fontSize: 18,
-  //     color: "#888",
-  //     marginLeft: 450,
-  //     marginBottom: 15,
-  //     fontFamily: "Inter-Light",
-  //   },
-  //   footerLinks: {
-  //     flexDirection: "row",
-  //     gap: 50,
-  //     marginRight: 300,
-  //     marginBottom: 15,
-  //   },
-  //   footerLinkItem: {
-  //     fontSize: 18,
-  //     color: "#888",
-  //     fontFamily: "Inter-Light",
-  //   },
   instagramBrandsSolid1Icon: {
     width: 38,
     height: 38,
@@ -366,143 +360,53 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#8a8a8a",
   },
-  profileRow: {
-    flexDirection: "row", // Membagi kiri (gambar) dan kanan (teks)
+  row: {
+    flexDirection: "row", // Membuat kartu berjajar ke samping
+    gap: 50, // Jarak antar kartu
     paddingHorizontal: 20,
-    alignItems: "flex-start",
-    marginTop: 50,
   },
-  imageContainer: {
-    flex: 1, // Mengambil porsi lebih kecil untuk gambar
+  card: {
+    flex: 1, // Agar kedua kartu memiliki lebar yang sama (50/50)
+    backgroundColor: "#fff",
+    borderWidth: 1,
+    borderColor: "#000",
+    overflow: "hidden",
+    height: 500, // Sesuaikan tinggi kartu
+  },
+  imagePlaceholder: {
+    flex: 3, // Mengambil 75% tinggi kartu
+    flexDirection: "row",
+  },
+  leftGray: {
+    flex: 1,
+    backgroundColor: "#ededed", // Abu-abu terang
+  },
+  rightGray: {
+    flex: 1,
+    backgroundColor: "#dbdbdb", // Abu-abu sedikit gelap (seperti di gambar)
+  },
+  textContainer: {
+    flex: 0.5, // Mengambil 25% tinggi kartu
+    backgroundColor: "#1c1c1c",
+    justifyContent: "center",
     alignItems: "center",
+    paddingHorizontal: 10,
   },
-  profileImage: {
-    width: 500,
-    height: 300,
-    marginLeft: 345,
+  textWrapper: {
+    alignItems: "flex-start",
   },
-  infoContainer: {
-    flex: 2, // Mengambil porsi lebih besar untuk teks
-    paddingLeft: 20,
-  },
-  descriptionText: {
+  titleText: {
+    color: "#fff",
     fontSize: 16,
-    color: "#333",
-    lineHeight: 20,
-    fontFamily: "Inter-Light",
-    marginTop: 50,
-  },
-  nameSection: {
-    marginTop: 50,
-  },
-  nameText: {
-    fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "left",
     fontFamily: "Inter-SemiBold",
-    color: "#000",
   },
-  locationText: {
-    fontSize: 16,
-    fontFamily: "Inter-SemiBold",
-    color: "#000",
-  },
-  aboutLabel: {
-    fontSize: 48, // Ukuran besar untuk tulisan "About"
-    fontWeight: "bold",
-    color: "#444",
-    letterSpacing: -2,
-    marginLeft: -5,
-    fontFamily: "Exo350B",
-  },
-  bottomLine: {
-    height: 1,
-    width: "50%",
-    backgroundColor: "#000",
-    marginHorizontal: 375,
-    marginTop: 0, // Pas di bawah tulisan About
-    opacity: 0.2,
-  },
-  skillsSectionContainer: {
-    alignItems: "center", // Mengetengahkan seluruh area konten
-    paddingVertical: 80,
-  },
-  mainSketchWrapper: {
-    width: 1000, // Lebar container utama tetap (Fixed Pixel)
-    height: 500, // Tinggi container utama tetap
-    position: "relative", // PENTING: Untuk menempatkan teks secara absolut di atasnya
-  },
-
-  // SATU GAMBAR UTUH
-  fullSketchImage: {
-    width: "100%",
-    height: "100%",
-    opacity: 0.8, // Membuat gambar sketsa terlihat sedikit pudar
-  },
-
-  // POSISI TEKS DESKRIPSI KIRI (Absolut)
-  descriptionLeftWrapper: {
-    position: "absolute", // Mengambang
-    top: 350, // Jarak tetap dari atas container
-    left: -100, // Jarak tetap dari kiri container
-    width: 320,
-  },
-  descriptionTextLeft: {
-    fontSize: 18,
-    color: "#333",
-    textAlign: "right", // Teks rata kanan mendekati gambar
-    lineHeight: 24,
-    fontFamily: "Inter-Light",
-  },
-
-  // POSISI JUDUL KIRI (Absolut)
-  titleLeftWrapper: {
-    position: "absolute",
-    top: 420, // Lebih rendah dari deskripsi
-    left: 200, // Mendekati garis tengah gambar
-  },
-  titleDesignerText: {
-    fontSize: 48,
-    fontWeight: "bold",
-    color: "#1c1c1c",
-    textTransform: "lowercase",
-    fontFamily: "Exo350B",
-    opacity: 0.75,
-  },
-
-  // POSISI TEKS DESKRIPSI KANAN (Absolut)
-  descriptionRightWrapper: {
-    position: "absolute",
-    top: 50, // Lebih tinggi dari deskripsi kiri
-    right: -125, // Jarak tetap dari kanan container
-    width: 350,
-  },
-  descriptionTextRight: {
-    fontSize: 18,
-    color: "#333",
-    textAlign: "left", // Teks rata kiri mendekati gambar
-    lineHeight: 24,
-    fontFamily: "Inter-Light",
-  },
-
-  // POSISI JUDUL KANAN (Absolut)
-  titleRightWrapper: {
-    position: "absolute",
-    top: 420, // Sejajar dengan judul kiri
-    right: 200, // Mendekati garis tengah gambar
-  },
-  titleAiDevText: {
-    fontSize: 48,
-    fontWeight: "bold",
-    color: "#1c1c1c",
-    textTransform: "lowercase",
-    fontFamily: "Exo350B",
-    opacity: 0.75,
-  },
-
-  // GARIS BAWAH (Fixed Width)
-  bottomHorizontalLine: {
-    width: 1050, // Panjang garis tetap melampaui konten
-    height: 1.5, // Ketebalan garis
-    backgroundColor: "#ccc", // Warna abu-abu pudar
-    marginTop: 40,
+  semesterText: {
+    color: "#fff",
+    fontSize: 14,
+    fontFamily: "Inter-Italic",
+    marginTop: 2,
+    textAlign: "left",
   },
 });

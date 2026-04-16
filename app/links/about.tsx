@@ -10,11 +10,11 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import Githubbrandssolid1 from "./assets/github-brands-solid.svg";
-import Instagrambrandssolid1 from "./assets/instagram-brands-solid.svg";
-import "./global.css";
+import Githubbrandssolid1 from "../assets/github-brands-solid.svg";
+import Instagrambrandssolid1 from "../assets/instagram-brands-solid.svg";
+import "../global.css";
 
-export default function Index() {
+export default function About() {
   const scrollRef = useRef<ScrollView>(null);
   const scrollToTop = () => {
     scrollRef.current?.scrollTo({ y: 0, animated: true });
@@ -64,44 +64,80 @@ export default function Index() {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={true}
       >
-        <View style={styles.skillsSectionContainer}>
-          <View style={styles.mainSketchWrapper}>
-            {/* SATU GAMBAR SKETSA UTUH (Sudah ada garis tengahnya) */}
+        <View style={styles.profileRow}>
+          {/* Sisi Kiri: Foto/Sketsa */}
+          <View style={styles.imageContainer}>
             <Image
-              source={require("./assets/image.png")}
-              style={styles.fullSketchImage}
+              source={require("../assets/logo-transparent.png")}
+              style={styles.profileImage}
               resizeMode="contain"
             />
-
-            {/* TEKS DESKRIPSI KIRI (Designer) */}
-            <View style={styles.descriptionLeftWrapper}>
-              <Text style={styles.descriptionTextLeft}>
-                Sketchs are the skills that I have recently{"\n"}got from
-                writing my projects.
-              </Text>
-            </View>
-
-            {/* TEKS JUDUL KIRI (Designer) */}
-            <View style={styles.titleLeftWrapper}>
-              <Text style={styles.titleDesignerText}>designer</Text>
-            </View>
-
-            {/* TEKS DESKRIPSI KANAN (AI-Developer) */}
-            <View style={styles.descriptionRightWrapper}>
-              <Text style={styles.descriptionTextRight}>
-                The one thats work/developing around{"\n"}AI regions such as,
-                chatbot as well as{"\n"}voice assistant.
-              </Text>
-            </View>
-
-            {/* TEKS JUDUL KANAN (AI-Developer) */}
-            <View style={styles.titleRightWrapper}>
-              <Text style={styles.titleAiDevText}>AI-developer</Text>
-            </View>
           </View>
 
-          {/* GARIS BAWAH PANJANG (Di luar wrapper gambar) */}
-          <View style={styles.bottomHorizontalLine} />
+          {/* Sisi Kanan: Deskripsi */}
+          <View style={styles.infoContainer}>
+            <Text style={styles.descriptionText}>
+              Since 2018, I have followed a coding courses that led me to{" "}
+              <br></br>
+              learned about the programmings world, since then thats <br></br>{" "}
+              the time I have been enjoyed the most until now. Whats im{" "}
+              <br></br>gonna took focus for my futures is by Artificial
+              Intelligence <br></br> (AI) side.
+            </Text>
+
+            <View style={styles.nameSection}>
+              <Text style={styles.nameText}>Zayyan A.I</Text>
+              <Text style={styles.locationText}>From Karawang, Indonesia</Text>
+            </View>
+
+            <Text style={styles.aboutLabel}>About</Text>
+          </View>
+        </View>
+
+        {/* Garis Horizontal Bawah */}
+        <View style={styles.bottomLine} />
+
+        <View style={styles.educationSection}>
+          {/* Header Section */}
+          <View style={styles.headerRow}>
+            <Text style={styles.educationPlanningTitle}>
+              Education Planning
+            </Text>
+          </View>
+
+          {/* Konten Utama: 2 Kolom */}
+          <View style={styles.educationGrid}>
+            {/* Kolom Kiri: SMA */}
+            <View style={styles.leftColumn}>
+              <Text style={styles.yearText}>2026 - 2029</Text>
+              <Text style={styles.schoolName}>SMAI Al-Azhar 9 Yogyakarta</Text>
+            </View>
+
+            {/* Kolom Kanan: Universitas */}
+            <View style={styles.rightColumn}>
+              {/* ITS */}
+              <View style={styles.eduEntry}>
+                <Text style={styles.yearText}>2029-2033</Text>
+                <Text style={styles.schoolName}>
+                  Institut Teknik Sepuluh Nopember
+                </Text>
+                <Text style={styles.majorText}>
+                  Fakultas Teknologi Elektro dan Informatika Cerdas, Rekayasa
+                  Kecerdasan Artifisial
+                </Text>
+              </View>
+
+              {/* RWTH Aachen */}
+              <View style={styles.eduEntry}>
+                <Text style={styles.yearText}>2033- 2035</Text>
+                <Text style={styles.schoolName}>RWTH Aachen University</Text>
+                <Text style={styles.majorText}>
+                  Faculty of Electrical Engineering and Information Technology,
+                  Computer Engineering
+                </Text>
+              </View>
+            </View>
+          </View>
         </View>
       </ScrollView>
 
@@ -421,88 +457,54 @@ const styles = StyleSheet.create({
     marginTop: 0, // Pas di bawah tulisan About
     opacity: 0.2,
   },
-  skillsSectionContainer: {
-    alignItems: "center", // Mengetengahkan seluruh area konten
-    paddingVertical: 80,
+  educationSection: {
+    paddingTop: 50,
+    paddingBottom: 80,
+    alignItems: "center", // Memastikan seluruh section berada di tengah
   },
-  mainSketchWrapper: {
-    width: 1000, // Lebar container utama tetap (Fixed Pixel)
-    height: 500, // Tinggi container utama tetap
-    position: "relative", // PENTING: Untuk menempatkan teks secara absolut di atasnya
+  headerRow: {
+    width: 1000, // Lebar area header disamakan dengan konten
+    alignItems: "flex-end", // "Education Planning's" berada di pojok kanan atas
+    marginBottom: 40,
   },
-
-  // SATU GAMBAR UTUH
-  fullSketchImage: {
-    width: "100%",
-    height: "100%",
-    opacity: 0.8, // Membuat gambar sketsa terlihat sedikit pudar
+  educationPlanningTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    fontStyle: "italic",
+    color: "#000",
+    fontFamily: "Inter-SemiBoldItalic",
   },
-
-  // POSISI TEKS DESKRIPSI KIRI (Absolut)
-  descriptionLeftWrapper: {
-    position: "absolute", // Mengambang
-    top: 350, // Jarak tetap dari atas container
-    left: -100, // Jarak tetap dari kiri container
-    width: 320,
+  educationGrid: {
+    flexDirection: "row", // Membagi menjadi dua kolom (kiri & kanan)
+    width: 1000,
+    justifyContent: "space-between",
   },
-  descriptionTextLeft: {
+  leftColumn: {
+    width: 350, // Lebar kolom kiri tetap
+  },
+  rightColumn: {
+    width: 550, // Lebar kolom kanan lebih besar untuk teks universitas yang panjang
+  },
+  eduEntry: {
+    marginBottom: 40, // Jarak antar riwayat pendidikan di kolom kanan
+  },
+  yearText: {
     fontSize: 18,
     color: "#333",
-    textAlign: "right", // Teks rata kanan mendekati gambar
-    lineHeight: 24,
+    marginBottom: 8,
     fontFamily: "Inter-Light",
   },
-
-  // POSISI JUDUL KIRI (Absolut)
-  titleLeftWrapper: {
-    position: "absolute",
-    top: 420, // Lebih rendah dari deskripsi
-    left: 200, // Mendekati garis tengah gambar
-  },
-  titleDesignerText: {
-    fontSize: 48,
-    fontWeight: "bold",
-    color: "#1c1c1c",
-    textTransform: "lowercase",
-    fontFamily: "Exo350B",
-    opacity: 0.75,
-  },
-
-  // POSISI TEKS DESKRIPSI KANAN (Absolut)
-  descriptionRightWrapper: {
-    position: "absolute",
-    top: 50, // Lebih tinggi dari deskripsi kiri
-    right: -125, // Jarak tetap dari kanan container
-    width: 350,
-  },
-  descriptionTextRight: {
+  schoolName: {
     fontSize: 18,
-    color: "#333",
-    textAlign: "left", // Teks rata kiri mendekati gambar
-    lineHeight: 24,
-    fontFamily: "Inter-Light",
-  },
-
-  // POSISI JUDUL KANAN (Absolut)
-  titleRightWrapper: {
-    position: "absolute",
-    top: 420, // Sejajar dengan judul kiri
-    right: 200, // Mendekati garis tengah gambar
-  },
-  titleAiDevText: {
-    fontSize: 48,
     fontWeight: "bold",
-    color: "#1c1c1c",
-    textTransform: "lowercase",
-    fontFamily: "Exo350B",
-    opacity: 0.75,
+    color: "#000",
+    marginBottom: 5,
+    fontFamily: "Inter-SemiBold",
   },
-
-  // GARIS BAWAH (Fixed Width)
-  bottomHorizontalLine: {
-    width: 1050, // Panjang garis tetap melampaui konten
-    height: 1.5, // Ketebalan garis
-    backgroundColor: "#ccc", // Warna abu-abu pudar
-    marginTop: 40,
+  majorText: {
+    fontSize: 16,
+    color: "#444",
+    lineHeight: 26, // Jarak antar baris agar penjelasan fakultas mudah dibaca
+    fontFamily: "Inter-Light",
   },
 });

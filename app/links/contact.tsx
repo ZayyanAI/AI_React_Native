@@ -1,25 +1,68 @@
-import { Image } from "expo-image";
 import { Link } from "expo-router";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import {
+  Alert,
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import Githubbrandssolid1 from "./assets/github-brands-solid.svg";
-import Instagrambrandssolid1 from "./assets/instagram-brands-solid.svg";
-import "./global.css";
+import Githubbrandssolid1 from "../assets/github-brands-solid.svg";
+import Instagrambrandssolid1 from "../assets/instagram-brands-solid.svg";
 
-export default function Index() {
+import GithubBlack from "../assets/github-brands-solid (1).svg";
+import InstagramBlack from "../assets/instagram-brands-solid (1).svg";
+import "../global.css";
+
+export default function Contact() {
   const scrollRef = useRef<ScrollView>(null);
+
+  // PINDAHKAN STATE KE SINI
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const scrollToTop = () => {
     scrollRef.current?.scrollTo({ y: 0, animated: true });
   };
 
+  // PINDAHKAN FUNGSI SUBMIT KE SINI
+  const handleSubmit = async () => {
+    if (!name || !email || !message) {
+      Alert.alert("Error", "Tolong isi semua bidang ya!");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const response = await fetch("https://formspree.io/f/myklkaaz", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      if (response.ok) {
+        Alert.alert("Sukses", "Pesan kamu berhasil terkirim!");
+        setName("");
+        setEmail("");
+        setMessage("");
+      } else {
+        Alert.alert("Error", "Gagal mengirim pesan.");
+      }
+    } catch (error) {
+      Alert.alert("Error", "Terjadi kesalahan koneksi.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <SafeAreaView style={styles.contentArea}>
       <View style={styles.header}>
@@ -64,44 +107,89 @@ export default function Index() {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={true}
       >
-        <View style={styles.skillsSectionContainer}>
-          <View style={styles.mainSketchWrapper}>
-            {/* SATU GAMBAR SKETSA UTUH (Sudah ada garis tengahnya) */}
-            <Image
-              source={require("./assets/image.png")}
-              style={styles.fullSketchImage}
-              resizeMode="contain"
-            />
-
-            {/* TEKS DESKRIPSI KIRI (Designer) */}
-            <View style={styles.descriptionLeftWrapper}>
-              <Text style={styles.descriptionTextLeft}>
-                Sketchs are the skills that I have recently{"\n"}got from
-                writing my projects.
-              </Text>
+        {/* --- SECTION 1: SOCIAL ICONS --- */}
+        <View style={styles.socialContainer}>
+          <View style={styles.socialRow}>
+            <View style={styles.socialItem}>
+              <Text style={styles.socialText}>Instagram</Text>
+              <InstagramBlack width={48} height={48} />
             </View>
-
-            {/* TEKS JUDUL KIRI (Designer) */}
-            <View style={styles.titleLeftWrapper}>
-              <Text style={styles.titleDesignerText}>designer</Text>
+            <View style={styles.socialItem}>
+              <Text style={styles.socialText}>Instagram</Text>
+              <InstagramBlack width={48} height={48} />
             </View>
-
-            {/* TEKS DESKRIPSI KANAN (AI-Developer) */}
-            <View style={styles.descriptionRightWrapper}>
-              <Text style={styles.descriptionTextRight}>
-                The one thats work/developing around{"\n"}AI regions such as,
-                chatbot as well as{"\n"}voice assistant.
-              </Text>
+          </View>
+          <View style={styles.socialRow}>
+            <View style={styles.socialItem}>
+              <Text style={styles.socialText}>Github</Text>
+              <Link href="https://github.com/ZayyanAI">
+                <GithubBlack width={48} height={48} />
+              </Link>
             </View>
+            <View style={styles.socialItem}>
+              <Text style={styles.socialText}>Github</Text>
+              <Link href="https://github.com/ZayyanAI">
+                <GithubBlack width={48} height={48} />
+              </Link>
+            </View>
+          </View>
+        </View>
 
-            {/* TEKS JUDUL KANAN (AI-Developer) */}
-            <View style={styles.titleRightWrapper}>
-              <Text style={styles.titleAiDevText}>AI-developer</Text>
+        {/* --- SECTION 2: HEADER --- */}
+        <View style={styles.headerContainer}>
+          <Text style={styles.subHeaderText}>
+            If you want to know more about me, {"\n"}let me know from you!
+          </Text>
+          <Text style={styles.contactTitle}>Contact</Text>
+        </View>
+
+        <View style={styles.divider} />
+
+        <Text style={styles.sendEmailTitle}>Send the Email</Text>
+
+        {/* --- SECTION 3: FORM --- */}
+        <View style={styles.formRow}>
+          {/* Kolom Kiri */}
+          <View style={styles.leftColumn}>
+            <View style={styles.inputGroup}>
+              <Text style={styles.label}>Name</Text>
+              <TextInput
+                style={styles.input}
+                value={name}
+                onChangeText={setName}
+              />
+            </View>
+            <View style={styles.inputGroup}>
+              <Text style={styles.label}>Email</Text>
+              <TextInput
+                style={styles.input}
+                keyboardType="email-address"
+                value={email}
+                onChangeText={setEmail}
+              />
             </View>
           </View>
 
-          {/* GARIS BAWAH PANJANG (Di luar wrapper gambar) */}
-          <View style={styles.bottomHorizontalLine} />
+          {/* Kolom Kanan */}
+          <View style={styles.rightColumn}>
+            <Text style={styles.label}>Message</Text>
+            <TextInput
+              style={[styles.input, styles.textArea]}
+              multiline
+              numberOfLines={6}
+              value={message}
+              onChangeText={setMessage}
+            />
+          </View>
+        </View>
+
+        {/* --- SECTION 4: BUTTON --- */}
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>
+              {isSubmitting ? "Sending..." : "Send e-mail"}
+            </Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
 
@@ -212,24 +300,24 @@ const styles = StyleSheet.create({
     minHeight: "100%",
     paddingBottom: 100,
   },
-  // titleContainer: {
-  //   alignItems: "center",
-  //   marginTop: 80,
-  // },
-  // mainTitle: {
-  //   fontSize: 32,
-  //   fontWeight: "600",
-  //   letterSpacing: 2,
-  //   color: "#333",
-  //   fontFamily: "Exo350B",
-  //   opacity: 0.95,
-  // },
-  // underline: {
-  //   width: "80%",
-  //   height: 1,
-  //   backgroundColor: "#ccc",
-  //   marginTop: 20,
-  // },
+  titleContainer: {
+    alignItems: "center",
+    marginTop: 80,
+  },
+  mainTitle: {
+    fontSize: 32,
+    fontWeight: "600",
+    letterSpacing: 2,
+    color: "#333",
+    fontFamily: "Exo350B",
+    opacity: 0.95,
+  },
+  underline: {
+    width: "80%",
+    height: 1,
+    backgroundColor: "#ccc",
+    marginTop: 20,
+  },
   contentPlaceholder: {
     padding: 20,
     alignItems: "center",
@@ -366,143 +454,70 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#8a8a8a",
   },
-  profileRow: {
-    flexDirection: "row", // Membagi kiri (gambar) dan kanan (teks)
-    paddingHorizontal: 20,
-    alignItems: "flex-start",
-    marginTop: 50,
+  // Social Styles
+  socialContainer: {
+    alignSelf: "flex-end",
+    marginBottom: 20,
+    marginRight: 450,
+    marginTop: 30,
   },
-  imageContainer: {
-    flex: 1, // Mengambil porsi lebih kecil untuk gambar
-    alignItems: "center",
-  },
-  profileImage: {
-    width: 500,
-    height: 300,
-    marginLeft: 345,
-  },
-  infoContainer: {
-    flex: 2, // Mengambil porsi lebih besar untuk teks
-    paddingLeft: 20,
-  },
-  descriptionText: {
-    fontSize: 16,
-    color: "#333",
-    lineHeight: 20,
+  socialRow: { flexDirection: "row", gap: 40, marginBottom: 15 },
+  socialItem: { flexDirection: "row", alignItems: "center", gap: 40 },
+  socialText: { fontWeight: "bold", fontSize: 18 },
+
+  // Header Styles
+  headerContainer: { alignItems: "flex-end", marginBottom: 10 },
+  subHeaderText: {
+    fontSize: 18,
+    color: "#444",
+    textAlign: "right",
+    width: "60%",
     fontFamily: "Inter-Light",
-    marginTop: 50,
+    marginRight: 450,
   },
-  nameSection: {
-    marginTop: 50,
-  },
-  nameText: {
-    fontSize: 16,
-    fontFamily: "Inter-SemiBold",
-    color: "#000",
-  },
-  locationText: {
-    fontSize: 16,
-    fontFamily: "Inter-SemiBold",
-    color: "#000",
-  },
-  aboutLabel: {
-    fontSize: 48, // Ukuran besar untuk tulisan "About"
+  contactTitle: {
+    fontSize: 40,
     fontWeight: "bold",
     color: "#444",
-    letterSpacing: -2,
-    marginLeft: -5,
+    marginTop: -5,
     fontFamily: "Exo350B",
+    marginRight: 450,
   },
-  bottomLine: {
-    height: 1,
-    width: "50%",
-    backgroundColor: "#000",
-    marginHorizontal: 375,
-    marginTop: 0, // Pas di bawah tulisan About
-    opacity: 0.2,
-  },
-  skillsSectionContainer: {
-    alignItems: "center", // Mengetengahkan seluruh area konten
-    paddingVertical: 80,
-  },
-  mainSketchWrapper: {
-    width: 1000, // Lebar container utama tetap (Fixed Pixel)
-    height: 500, // Tinggi container utama tetap
-    position: "relative", // PENTING: Untuk menempatkan teks secara absolut di atasnya
+  divider: { height: 1, backgroundColor: "#999", marginBottom: 20 },
+  sendEmailTitle: {
+    fontSize: 24,
+    fontFamily: "Inter-SemiBoldItalic",
+    marginBottom: 25,
+    marginLeft: 450,
   },
 
-  // SATU GAMBAR UTUH
-  fullSketchImage: {
-    width: "100%",
-    height: "100%",
-    opacity: 0.8, // Membuat gambar sketsa terlihat sedikit pudar
+  // Form Styles
+  formRow: { flexDirection: "row" },
+  leftColumn: { flex: 1, marginLeft: 450 },
+  rightColumn: { flex: 1 },
+  inputGroup: { marginBottom: 15 },
+  label: { fontSize: 14, color: "#555", marginBottom: 5 },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    padding: 10,
+    borderRadius: 2,
+    backgroundColor: "#fff",
+    width: "45%",
   },
+  textArea: { height: 120, textAlignVertical: "top" },
 
-  // POSISI TEKS DESKRIPSI KIRI (Absolut)
-  descriptionLeftWrapper: {
-    position: "absolute", // Mengambang
-    top: 350, // Jarak tetap dari atas container
-    left: -100, // Jarak tetap dari kiri container
-    width: 320,
+  // Button Styles
+  buttonContainer: {
+    alignItems: "flex-end",
+    marginTop: 20,
+    marginHorizontal: 400,
   },
-  descriptionTextLeft: {
-    fontSize: 18,
-    color: "#333",
-    textAlign: "right", // Teks rata kanan mendekati gambar
-    lineHeight: 24,
-    fontFamily: "Inter-Light",
+  button: {
+    backgroundColor: "#1a1a1a",
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 2,
   },
-
-  // POSISI JUDUL KIRI (Absolut)
-  titleLeftWrapper: {
-    position: "absolute",
-    top: 420, // Lebih rendah dari deskripsi
-    left: 200, // Mendekati garis tengah gambar
-  },
-  titleDesignerText: {
-    fontSize: 48,
-    fontWeight: "bold",
-    color: "#1c1c1c",
-    textTransform: "lowercase",
-    fontFamily: "Exo350B",
-    opacity: 0.75,
-  },
-
-  // POSISI TEKS DESKRIPSI KANAN (Absolut)
-  descriptionRightWrapper: {
-    position: "absolute",
-    top: 50, // Lebih tinggi dari deskripsi kiri
-    right: -125, // Jarak tetap dari kanan container
-    width: 350,
-  },
-  descriptionTextRight: {
-    fontSize: 18,
-    color: "#333",
-    textAlign: "left", // Teks rata kiri mendekati gambar
-    lineHeight: 24,
-    fontFamily: "Inter-Light",
-  },
-
-  // POSISI JUDUL KANAN (Absolut)
-  titleRightWrapper: {
-    position: "absolute",
-    top: 420, // Sejajar dengan judul kiri
-    right: 200, // Mendekati garis tengah gambar
-  },
-  titleAiDevText: {
-    fontSize: 48,
-    fontWeight: "bold",
-    color: "#1c1c1c",
-    textTransform: "lowercase",
-    fontFamily: "Exo350B",
-    opacity: 0.75,
-  },
-
-  // GARIS BAWAH (Fixed Width)
-  bottomHorizontalLine: {
-    width: 1050, // Panjang garis tetap melampaui konten
-    height: 1.5, // Ketebalan garis
-    backgroundColor: "#ccc", // Warna abu-abu pudar
-    marginTop: 40,
-  },
+  buttonText: { color: "#fff", fontSize: 14, fontFamily: "Inter-Regular" },
 });

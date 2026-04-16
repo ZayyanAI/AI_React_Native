@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "AI - React Native",
-    "slug": "AI_React_Native",
+    "name": "WebPortfolio - Zayyan A.I",
+    "slug": "WebPortfolio",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -24,7 +24,7 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/logo-transparent.png"
     },
     "plugins": [
       "expo-router",

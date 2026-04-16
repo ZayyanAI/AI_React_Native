@@ -2,19 +2,19 @@ import { Image } from "expo-image";
 import { Link } from "expo-router";
 import React, { useRef } from "react";
 import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import Githubbrandssolid1 from "./assets/github-brands-solid.svg";
-import Instagrambrandssolid1 from "./assets/instagram-brands-solid.svg";
-import "./global.css";
+import Githubbrandssolid1 from "../assets/github-brands-solid.svg";
+import Instagrambrandssolid1 from "../assets/instagram-brands-solid.svg";
+import "../global.css";
 
-export default function Index() {
+export default function Engineering() {
   const scrollRef = useRef<ScrollView>(null);
   const scrollToTop = () => {
     scrollRef.current?.scrollTo({ y: 0, animated: true });
@@ -64,49 +64,50 @@ export default function Index() {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={true}
       >
-        <View style={styles.skillsSectionContainer}>
-          <View style={styles.mainSketchWrapper}>
-            {/* SATU GAMBAR SKETSA UTUH (Sudah ada garis tengahnya) */}
+        <View style={styles.largeCard}>
+          <Image
+            source={require("../assets/robot.jpeg")}
+            style={styles.imagePlaceholder}
+          />
+          <View style={styles.blackBar}>
+            <Text style={styles.yearText}>2025-2026</Text>
+            <Text style={styles.bannerTitle}>
+              FIRST Tech Challenge Nusantara Regional Championship - DECODE
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.row}>
+          <View style={styles.smallCard}>
             <Image
-              source={require("./assets/image.png")}
-              style={styles.fullSketchImage}
-              resizeMode="contain"
+              source={require("../assets/berbareng.jpeg")}
+              style={styles.imagePlaceholder}
             />
-
-            {/* TEKS DESKRIPSI KIRI (Designer) */}
-            <View style={styles.descriptionLeftWrapper}>
-              <Text style={styles.descriptionTextLeft}>
-                Sketchs are the skills that I have recently{"\n"}got from
-                writing my projects.
-              </Text>
-            </View>
-
-            {/* TEKS JUDUL KIRI (Designer) */}
-            <View style={styles.titleLeftWrapper}>
-              <Text style={styles.titleDesignerText}>designer</Text>
-            </View>
-
-            {/* TEKS DESKRIPSI KANAN (AI-Developer) */}
-            <View style={styles.descriptionRightWrapper}>
-              <Text style={styles.descriptionTextRight}>
-                The one thats work/developing around{"\n"}AI regions such as,
-                chatbot as well as{"\n"}voice assistant.
-              </Text>
-            </View>
-
-            {/* TEKS JUDUL KANAN (AI-Developer) */}
-            <View style={styles.titleRightWrapper}>
-              <Text style={styles.titleAiDevText}>AI-developer</Text>
-            </View>
           </View>
 
-          {/* GARIS BAWAH PANJANG (Di luar wrapper gambar) */}
-          <View style={styles.bottomHorizontalLine} />
+          <View style={styles.squareCard}>
+            <Image
+              source={require("../assets/SM-Logo.png")}
+              resizeMode="contain"
+              style={styles.imageLogo}
+            />
+          </View>
+
+          <View style={styles.smallCard}>
+            <Image
+              source={require("../assets/award.jpeg")}
+              style={styles.imagePlaceholder}
+            />
+            <View style={styles.smallBlackBar}>
+              <Text style={styles.idText}>#15242</Text>
+              <Text style={styles.teamText}>STEAMachines</Text>
+            </View>
+          </View>
         </View>
       </ScrollView>
 
       <View style={{ flex: 1, backgroundColor: "#f9f9f7" }}>
-        <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
+        <ScrollView ref={scrollRef}>
           {/* Konten Halaman Anda di sini */}
           <View style={{ height: 1000 }} />
         </ScrollView>
@@ -210,26 +211,26 @@ const styles = StyleSheet.create({
   scrollContent: {
     backgroundColor: "#f9f9f7", // Warna krem pucat seperti di gambar
     minHeight: "100%",
-    paddingBottom: 100,
+    paddingVertical: 20,
   },
-  // titleContainer: {
-  //   alignItems: "center",
-  //   marginTop: 80,
-  // },
-  // mainTitle: {
-  //   fontSize: 32,
-  //   fontWeight: "600",
-  //   letterSpacing: 2,
-  //   color: "#333",
-  //   fontFamily: "Exo350B",
-  //   opacity: 0.95,
-  // },
-  // underline: {
-  //   width: "80%",
-  //   height: 1,
-  //   backgroundColor: "#ccc",
-  //   marginTop: 20,
-  // },
+  titleContainer: {
+    alignItems: "center",
+    marginTop: 80,
+  },
+  mainTitle: {
+    fontSize: 32,
+    fontWeight: "600",
+    letterSpacing: 2,
+    color: "#333",
+    fontFamily: "Exo350B",
+    opacity: 0.95,
+  },
+  underline: {
+    width: "80%",
+    height: 1,
+    backgroundColor: "#ccc",
+    marginTop: 20,
+  },
   contentPlaceholder: {
     padding: 20,
     alignItems: "center",
@@ -366,143 +367,72 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#8a8a8a",
   },
-  profileRow: {
-    flexDirection: "row", // Membagi kiri (gambar) dan kanan (teks)
-    paddingHorizontal: 20,
+  largeCard: {
+    width: "98.5%",
+    height: 750,
+    borderWidth: 1.5,
+    borderColor: "#000",
+    marginBottom: 20,
+    marginHorizontal: 15,
+  },
+  imagePlaceholder: {
+    flex: 1,
+    backgroundColor: "#d6d6d6",
+  },
+  blackBar: {
+    backgroundColor: "#1a1a1a",
+    padding: 10,
+    alignItems: "flex-end", // Teks rata kanan seperti di gambar
+  },
+  bannerTitle: {
+    color: "#fff",
+    fontSize: 16,
+    fontFamily: "Inter-SemiBold",
+  },
+  yearText: {
+    color: "#fff",
+    fontSize: 14,
+    fontFamily: "Inter-Italic",
+  },
+  // Style untuk Baris Bawah
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "flex-start",
-    marginTop: 50,
   },
-  imageContainer: {
-    flex: 1, // Mengambil porsi lebih kecil untuk gambar
+  smallCard: {
+    flex: 1,
+    height: 275,
+    borderWidth: 1.5,
+    borderColor: "#000",
+    marginHorizontal: 15,
+  },
+  squareCard: {
+    width: 275, // Ukuran spesifik untuk tengah agar terlihat kotak
+    height: 275,
+    borderWidth: 1.5,
+    borderColor: "#000",
+    marginHorizontal: 15,
+    justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#1c1c1c",
   },
-  profileImage: {
-    width: 500,
-    height: 300,
-    marginLeft: 345,
+  smallBlackBar: {
+    backgroundColor: "#1a1a1a",
+    padding: 5,
   },
-  infoContainer: {
-    flex: 2, // Mengambil porsi lebih besar untuk teks
-    paddingLeft: 20,
+  idText: {
+    color: "#fff",
+    fontSize: 14,
+    fontFamily: "Inter-Italic",
   },
-  descriptionText: {
-    fontSize: 16,
-    color: "#333",
-    lineHeight: 20,
-    fontFamily: "Inter-Light",
-    marginTop: 50,
-  },
-  nameSection: {
-    marginTop: 50,
-  },
-  nameText: {
+  teamText: {
+    color: "#fff",
     fontSize: 16,
     fontFamily: "Inter-SemiBold",
-    color: "#000",
   },
-  locationText: {
-    fontSize: 16,
-    fontFamily: "Inter-SemiBold",
-    color: "#000",
-  },
-  aboutLabel: {
-    fontSize: 48, // Ukuran besar untuk tulisan "About"
-    fontWeight: "bold",
-    color: "#444",
-    letterSpacing: -2,
-    marginLeft: -5,
-    fontFamily: "Exo350B",
-  },
-  bottomLine: {
-    height: 1,
-    width: "50%",
-    backgroundColor: "#000",
-    marginHorizontal: 375,
-    marginTop: 0, // Pas di bawah tulisan About
-    opacity: 0.2,
-  },
-  skillsSectionContainer: {
-    alignItems: "center", // Mengetengahkan seluruh area konten
-    paddingVertical: 80,
-  },
-  mainSketchWrapper: {
-    width: 1000, // Lebar container utama tetap (Fixed Pixel)
-    height: 500, // Tinggi container utama tetap
-    position: "relative", // PENTING: Untuk menempatkan teks secara absolut di atasnya
-  },
-
-  // SATU GAMBAR UTUH
-  fullSketchImage: {
-    width: "100%",
-    height: "100%",
-    opacity: 0.8, // Membuat gambar sketsa terlihat sedikit pudar
-  },
-
-  // POSISI TEKS DESKRIPSI KIRI (Absolut)
-  descriptionLeftWrapper: {
-    position: "absolute", // Mengambang
-    top: 350, // Jarak tetap dari atas container
-    left: -100, // Jarak tetap dari kiri container
-    width: 320,
-  },
-  descriptionTextLeft: {
-    fontSize: 18,
-    color: "#333",
-    textAlign: "right", // Teks rata kanan mendekati gambar
-    lineHeight: 24,
-    fontFamily: "Inter-Light",
-  },
-
-  // POSISI JUDUL KIRI (Absolut)
-  titleLeftWrapper: {
-    position: "absolute",
-    top: 420, // Lebih rendah dari deskripsi
-    left: 200, // Mendekati garis tengah gambar
-  },
-  titleDesignerText: {
-    fontSize: 48,
-    fontWeight: "bold",
-    color: "#1c1c1c",
-    textTransform: "lowercase",
-    fontFamily: "Exo350B",
-    opacity: 0.75,
-  },
-
-  // POSISI TEKS DESKRIPSI KANAN (Absolut)
-  descriptionRightWrapper: {
-    position: "absolute",
-    top: 50, // Lebih tinggi dari deskripsi kiri
-    right: -125, // Jarak tetap dari kanan container
-    width: 350,
-  },
-  descriptionTextRight: {
-    fontSize: 18,
-    color: "#333",
-    textAlign: "left", // Teks rata kiri mendekati gambar
-    lineHeight: 24,
-    fontFamily: "Inter-Light",
-  },
-
-  // POSISI JUDUL KANAN (Absolut)
-  titleRightWrapper: {
-    position: "absolute",
-    top: 420, // Sejajar dengan judul kiri
-    right: 200, // Mendekati garis tengah gambar
-  },
-  titleAiDevText: {
-    fontSize: 48,
-    fontWeight: "bold",
-    color: "#1c1c1c",
-    textTransform: "lowercase",
-    fontFamily: "Exo350B",
-    opacity: 0.75,
-  },
-
-  // GARIS BAWAH (Fixed Width)
-  bottomHorizontalLine: {
-    width: 1050, // Panjang garis tetap melampaui konten
-    height: 1.5, // Ketebalan garis
-    backgroundColor: "#ccc", // Warna abu-abu pudar
-    marginTop: 40,
+  imageLogo: {
+    width: "95%",
+    height: "80%",
   },
 });

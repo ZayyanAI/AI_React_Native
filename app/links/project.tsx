@@ -10,14 +10,19 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import Githubbrandssolid1 from "./assets/github-brands-solid.svg";
-import Instagrambrandssolid1 from "./assets/instagram-brands-solid.svg";
-import "./global.css";
+import Githubbrandssolid1 from "../assets/github-brands-solid.svg";
+import Instagrambrandssolid1 from "../assets/instagram-brands-solid.svg";
+import "../global.css";
 
-export default function Index() {
+export default function Project() {
   const scrollRef = useRef<ScrollView>(null);
   const scrollToTop = () => {
-    scrollRef.current?.scrollTo({ y: 0, animated: true });
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({
+        y: 0,
+        animated: true,
+      });
+    }
   };
 
   return (
@@ -64,44 +69,83 @@ export default function Index() {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={true}
       >
-        <View style={styles.skillsSectionContainer}>
-          <View style={styles.mainSketchWrapper}>
-            {/* SATU GAMBAR SKETSA UTUH (Sudah ada garis tengahnya) */}
-            <Image
-              source={require("./assets/image.png")}
-              style={styles.fullSketchImage}
-              resizeMode="contain"
-            />
-
-            {/* TEKS DESKRIPSI KIRI (Designer) */}
-            <View style={styles.descriptionLeftWrapper}>
-              <Text style={styles.descriptionTextLeft}>
-                Sketchs are the skills that I have recently{"\n"}got from
-                writing my projects.
-              </Text>
-            </View>
-
-            {/* TEKS JUDUL KIRI (Designer) */}
-            <View style={styles.titleLeftWrapper}>
-              <Text style={styles.titleDesignerText}>designer</Text>
-            </View>
-
-            {/* TEKS DESKRIPSI KANAN (AI-Developer) */}
-            <View style={styles.descriptionRightWrapper}>
-              <Text style={styles.descriptionTextRight}>
-                The one thats work/developing around{"\n"}AI regions such as,
-                chatbot as well as{"\n"}voice assistant.
-              </Text>
-            </View>
-
-            {/* TEKS JUDUL KANAN (AI-Developer) */}
-            <View style={styles.titleRightWrapper}>
-              <Text style={styles.titleAiDevText}>AI-developer</Text>
-            </View>
+        <View style={styles.mainContainer}>
+          {/* AREA KIRI: Judul dan Deskripsi */}
+          <View style={styles.leftSection}>
+            <Text style={styles.projectsTitle}>Projects</Text>
+            <Text style={styles.descriptionText}>
+              Several projects finished since level 9 <br></br> started till
+              now.
+            </Text>
           </View>
 
-          {/* GARIS BAWAH PANJANG (Di luar wrapper gambar) */}
-          <View style={styles.bottomHorizontalLine} />
+          {/* AREA TENGAH: Garis Vertikal */}
+          <View style={styles.verticalLine} />
+
+          {/* AREA KANAN: Gambar */}
+          <View style={styles.rightSection}>
+            <Image
+              source={require("../assets/box-removebg-preview.png")}
+              style={styles.boxImage}
+              resizeMode="contain"
+            />
+          </View>
+        </View>
+
+        {/* GARIS BAWAH (Underline) */}
+        <View style={styles.bottomUnderline} />
+        <View style={styles.imageContainer}>
+          <Link href="/projects/science">
+            <View style={styles.cardContainer}>
+              <View style={styles.whiteSection} />
+              <View style={styles.blackSection}>
+                <Text style={styles.titleText}>Science Project</Text>
+              </View>
+            </View>
+          </Link>
+          <Link href="/projects/engineering">
+            <View style={styles.cardContainer}>
+              <View style={styles.whiteSection} />
+              <View style={styles.blackSection}>
+                <Text style={styles.titleText}>Engineering Project</Text>
+              </View>
+            </View>
+          </Link>
+          <Link href="/projects/literacy">
+            <View style={styles.cardContainer}>
+              <View style={styles.whiteSection} />
+              <View style={styles.blackSection}>
+                <Text style={styles.titleText}>Literacy Project</Text>
+              </View>
+            </View>
+          </Link>
+        </View>
+
+        <View style={styles.imageContainer}>
+          <Link href="/projects/social">
+            <View style={styles.cardContainer}>
+              <View style={styles.whiteSection} />
+              <View style={styles.blackSection}>
+                <Text style={styles.titleText}>Social Project</Text>
+              </View>
+            </View>
+          </Link>
+          <Link href="/projects/art">
+            <View style={styles.cardContainer}>
+              <View style={styles.whiteSection} />
+              <View style={styles.blackSection}>
+                <Text style={styles.titleText}>Art Project</Text>
+              </View>
+            </View>
+          </Link>
+          <Link href="/projects/personal_project">
+            <View style={styles.cardContainer}>
+              <View style={styles.whiteSection} />
+              <View style={styles.blackSection}>
+                <Text style={styles.titleText}>Personal Project</Text>
+              </View>
+            </View>
+          </Link>
         </View>
       </ScrollView>
 
@@ -120,7 +164,7 @@ export default function Index() {
           <TouchableOpacity
             style={styles.arrowContainer}
             onPress={scrollToTop}
-            activeOpacity={0.7}
+            activeOpacity={0.6}
           >
             {/* Layer Segitiga Luar (Abu-abu) */}
             <View style={styles.triangleOuter}>
@@ -212,37 +256,28 @@ const styles = StyleSheet.create({
     minHeight: "100%",
     paddingBottom: 100,
   },
-  // titleContainer: {
-  //   alignItems: "center",
-  //   marginTop: 80,
-  // },
-  // mainTitle: {
-  //   fontSize: 32,
-  //   fontWeight: "600",
-  //   letterSpacing: 2,
-  //   color: "#333",
-  //   fontFamily: "Exo350B",
-  //   opacity: 0.95,
-  // },
-  // underline: {
-  //   width: "80%",
-  //   height: 1,
-  //   backgroundColor: "#ccc",
-  //   marginTop: 20,
-  // },
+  titleContainer: {
+    alignItems: "center",
+    marginTop: 80,
+  },
+  iconImage: {},
+  mainTitle: {
+    fontSize: 32,
+    fontWeight: "600",
+    letterSpacing: 2,
+    color: "#333",
+    fontFamily: "Exo350B",
+    opacity: 0.95,
+  },
+  underline: {
+    width: "80%",
+    height: 1,
+    backgroundColor: "#ccc",
+    marginTop: 20,
+    marginBottom: 10,
+  },
   contentPlaceholder: {
     padding: 20,
-    alignItems: "center",
-  },
-  projectCard: {
-    width: "90%",
-    height: 200,
-    backgroundColor: "white",
-    marginVertical: 15,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#eee",
-    justifyContent: "center",
     alignItems: "center",
   },
   //   footer: {
@@ -366,143 +401,126 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#8a8a8a",
   },
-  profileRow: {
-    flexDirection: "row", // Membagi kiri (gambar) dan kanan (teks)
-    paddingHorizontal: 20,
-    alignItems: "flex-start",
-    marginTop: 50,
-  },
   imageContainer: {
-    flex: 1, // Mengambil porsi lebih kecil untuk gambar
+    flexDirection: "row",
+    flexWrap: "wrap", // Membuat item turun ke bawah jika sudah penuh 3 kolom
+    justifyContent: "center",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    // marginTop: 30,
+    gap: 250, // Jarak antar kotak
+  },
+  projectCard: {
+    width: 200,
+    marginBottom: 20,
     alignItems: "center",
   },
-  profileImage: {
-    width: 500,
-    height: 300,
-    marginLeft: 345,
+  imagePlaceholder: {
+    width: "100%",
+    aspectRatio: 1, // Membuat kotak persegi sempurna
+    backgroundColor: "#e0e0e0",
+    borderRadius: 4,
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#ddd",
   },
-  infoContainer: {
-    flex: 2, // Mengambil porsi lebih besar untuk teks
-    paddingLeft: 20,
+  placeholderText: {
+    fontSize: 10,
+    color: "#999",
+  },
+  projectTitle: {
+    marginTop: 8,
+    fontSize: 18,
+    fontWeight: "500",
+    textAlign: "center",
+    color: "#333",
+    fontFamily: "Inter-Bold",
+  },
+  cardContainer: {
+    width: 320, // Tentukan lebar kartu statis agar konsisten
+    height: 300, // Tentukan tinggi kartu statis
+    backgroundColor: "white", // Pastikan area atas putih
+    borderRadius: 25, // Membuat sudut tumpul pada kartu utama
+    borderWidth: 2, // Memberikan garis pinggir hitam
+    borderColor: "black", // Warna garis pinggir
+    overflow: "hidden", // SANGAT PENTING: Agar bagian hitam tidak keluar dari radius sudut kartu putih
+  },
+  whiteSection: {
+    flex: 4, // Mengambil 80% tinggi kartu
+    backgroundColor: "white", // Tetap putih
+    // Hapus borderRadius di sini, karena sudah diatur di cardContainer
+  },
+  blackSection: {
+    flex: 1, // Mengambil sisa 20% tinggi kartu di bagian bawah
+    backgroundColor: "#1c1c1c", // Warna hitam/gelap
+    justifyContent: "center", // Teks rata tengah secara vertikal
+    alignItems: "center", // Teks rata tengah secara horizontal
+    paddingHorizontal: 15,
+    // Kita tidak perlu memberikan border radius bawah di sini karena property overflow: 'hidden' di container induknya sudah memotongnya secara otomatis.
+  },
+  titleText: {
+    color: "white", // Teks berwarna putih agar terlihat
+    fontSize: 18, // Ukuran teks
+    fontWeight: "600", // Ketebalan teks (Semi-Bold)
+    textAlign: "center",
+    fontFamily: "Inter-SemiBold", // Sesuaikan dengan font jika ada
+  },
+  mainContainer: {
+    width: 1000, // Menggunakan pixel tetap agar tidak berubah-ubah
+    height: 300, // Tinggi tetap
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: 50,
+    marginLeft: 500,
+  },
+
+  leftSection: {
+    paddingTop: 135,
+    width: 400, // Lebar area teks tetap
+    justifyContent: "center",
+    alignItems: "flex-end", // Teks dibuat rata kanan mendekati garis tengah
+    paddingRight: 75,
+  },
+  projectsTitle: {
+    fontSize: 50,
+    fontWeight: "bold",
+    color: "#333",
+    fontFamily: "Exo350B",
   },
   descriptionText: {
-    fontSize: 16,
-    color: "#333",
-    lineHeight: 20,
-    fontFamily: "Inter-Light",
-    marginTop: 50,
-  },
-  nameSection: {
-    marginTop: 50,
-  },
-  nameText: {
-    fontSize: 16,
-    fontFamily: "Inter-SemiBold",
-    color: "#000",
-  },
-  locationText: {
-    fontSize: 16,
-    fontFamily: "Inter-SemiBold",
-    color: "#000",
-  },
-  aboutLabel: {
-    fontSize: 48, // Ukuran besar untuk tulisan "About"
-    fontWeight: "bold",
-    color: "#444",
-    letterSpacing: -2,
-    marginLeft: -5,
-    fontFamily: "Exo350B",
-  },
-  bottomLine: {
-    height: 1,
-    width: "50%",
-    backgroundColor: "#000",
-    marginHorizontal: 375,
-    marginTop: 0, // Pas di bawah tulisan About
-    opacity: 0.2,
-  },
-  skillsSectionContainer: {
-    alignItems: "center", // Mengetengahkan seluruh area konten
-    paddingVertical: 80,
-  },
-  mainSketchWrapper: {
-    width: 1000, // Lebar container utama tetap (Fixed Pixel)
-    height: 500, // Tinggi container utama tetap
-    position: "relative", // PENTING: Untuk menempatkan teks secara absolut di atasnya
-  },
-
-  // SATU GAMBAR UTUH
-  fullSketchImage: {
-    width: "100%",
-    height: "100%",
-    opacity: 0.8, // Membuat gambar sketsa terlihat sedikit pudar
-  },
-
-  // POSISI TEKS DESKRIPSI KIRI (Absolut)
-  descriptionLeftWrapper: {
-    position: "absolute", // Mengambang
-    top: 350, // Jarak tetap dari atas container
-    left: -100, // Jarak tetap dari kiri container
-    width: 320,
-  },
-  descriptionTextLeft: {
     fontSize: 18,
-    color: "#333",
-    textAlign: "right", // Teks rata kanan mendekati gambar
-    lineHeight: 24,
+    color: "#666",
+    textAlign: "right", // Deskripsi rata kanan sesuai gambar
+    marginTop: 5,
     fontFamily: "Inter-Light",
   },
 
-  // POSISI JUDUL KIRI (Absolut)
-  titleLeftWrapper: {
-    position: "absolute",
-    top: 420, // Lebih rendah dari deskripsi
-    left: 200, // Mendekati garis tengah gambar
-  },
-  titleDesignerText: {
-    fontSize: 48,
-    fontWeight: "bold",
-    color: "#1c1c1c",
-    textTransform: "lowercase",
-    fontFamily: "Exo350B",
-    opacity: 0.75,
-  },
-
-  // POSISI TEKS DESKRIPSI KANAN (Absolut)
-  descriptionRightWrapper: {
-    position: "absolute",
-    top: 50, // Lebih tinggi dari deskripsi kiri
-    right: -125, // Jarak tetap dari kanan container
-    width: 350,
-  },
-  descriptionTextRight: {
-    fontSize: 18,
-    color: "#333",
-    textAlign: "left", // Teks rata kiri mendekati gambar
-    lineHeight: 24,
-    fontFamily: "Inter-Light",
-  },
-
-  // POSISI JUDUL KANAN (Absolut)
-  titleRightWrapper: {
-    position: "absolute",
-    top: 420, // Sejajar dengan judul kiri
-    right: 200, // Mendekati garis tengah gambar
-  },
-  titleAiDevText: {
-    fontSize: 48,
-    fontWeight: "bold",
-    color: "#1c1c1c",
-    textTransform: "lowercase",
-    fontFamily: "Exo350B",
-    opacity: 0.75,
-  },
-
-  // GARIS BAWAH (Fixed Width)
-  bottomHorizontalLine: {
-    width: 1050, // Panjang garis tetap melampaui konten
-    height: 1.5, // Ketebalan garis
+  verticalLine: {
+    width: 1.5, // Garis sangat tipis
+    height: 220, // Tinggi garis tetap
     backgroundColor: "#ccc", // Warna abu-abu pudar
-    marginTop: 40,
+  },
+
+  rightSection: {
+    width: 400, // Lebar area gambar tetap
+    justifyContent: "center",
+    alignItems: "flex-start", // Gambar diletakkan di awal setelah garis
+    paddingLeft: 40,
+  },
+  boxImage: {
+    width: 250, // Ukuran gambar tetap
+    height: 250,
+    opacity: 0.2, // Membuat gambar terlihat pudar/abu-abu
+  },
+
+  bottomUnderline: {
+    width: 950, // Panjang garis bawah lebih lebar dari konten
+    height: 1, // Ketebalan garis 1 pixel
+    backgroundColor: "#ccc", // Warna abu-abu tipis
+    marginTop: 10,
+    marginBottom: 50,
+    marginLeft: 500,
   },
 });
