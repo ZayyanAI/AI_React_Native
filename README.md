@@ -1,3 +1,3 @@
-# AI-React_Native 👋
+# WebPortfolio 👋
 
-An AI-Assistant build using **React-Native .js** and ai created using **n8n**. By ***Zayyan A.I***
+By **_Zayyan A.I_**
